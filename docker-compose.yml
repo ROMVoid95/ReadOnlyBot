@@ -1,0 +1,19 @@
+version: "2"
+services:
+  redis:
+    image: redis
+  rocketbot:
+    depends_on:
+      - "redis"
+    image: readonlydev/discordbot
+    volumes:
+      - ./config-compose.json:/readonlybot/config.json
+  prometheus:
+    depends_on:
+      - "readonlybot"
+    image: prom/prometheus
+    volumes:
+      - ./prometheus:/prometheus-data
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+    ports:
+      - "9090:9090"

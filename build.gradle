@@ -1,0 +1,127 @@
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
+    classpath "com.palantir.gradle.docker:gradle-docker:0.26.0"
+  }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+}
+
+apply plugin: "com.github.johnrengelman.shadow"
+apply plugin: "com.palantir.docker"
+
+mainClassName = "net.readonly.ReadOnlyBot"
+def ver = new Version(major: 1, minor: 0, revision: 0)
+version ver.toString()
+
+sourceCompatibility = 15
+targetCompatibility = 15
+
+apply from: "dependencies.gradle"
+
+task generateLanguageList {
+    def out = new PrintStream(new FileOutputStream("${projectDir}/src/main/resources/assets/languages/list.txt"))
+    new File("${projectDir}/src/main/resources/assets/languages").listFiles().each {
+        if (it.getName().endsWith("json")) {
+            out.println(it.getName())
+        }
+    }
+
+    out.close()
+}
+
+task copyFileToAssets(type: Copy) {
+    from shadowJar.outputs
+    into file('assets')
+}
+
+copyFileToAssets.dependsOn shadowJar
+
+docker {
+    name "readonlydev/discordbot:$ver"
+    tag "latest", "readonlydev/discordbot:latest"
+    copySpec.from("assets").into("assets")
+    buildArgs([
+        version: ver.toString(),
+        jattachVersion: "v1.5"
+    ])
+}
+
+docker.dependsOn shadowJar as Task
+docker.dependsOn copyFileToAssets
+
+compileJava.dependsOn generateLanguageList
+
+task ci {
+    dependsOn shadowJar
+    dependsOn tasks.docker
+}
+
+import org.apache.tools.ant.filters.ReplaceTokens
+
+def gitRevision() {
+    def gitVersion = new ByteArrayOutputStream()
+    exec {
+        commandLine("git", "rev-parse", "--short", "HEAD")
+        standardOutput = gitVersion
+    }
+
+    return gitVersion.toString().trim()
+}
+
+task sourcesForRelease(type: Copy) {
+    from ('src/main/java') {
+        include '**/ReadOnlyBot.java'
+        filter(ReplaceTokens, tokens: [
+                version: ver.toString(),
+                revision: gitRevision().toString()
+        ])
+    }
+    into 'build/filteredSrc'
+
+    includeEmptyDirs = false
+}
+
+task generateJavaSources(type: SourceTask) {
+    def javaSources = sourceSets.main.allJava.filter {
+        it.name != 'ReadOnlyBot.java'
+    }
+    source = javaSources + sourcesForRelease.destinationDir
+
+    dependsOn sourcesForRelease
+}
+
+compileJava {
+    source = generateJavaSources.source
+    classpath = sourceSets.main.compileClasspath
+
+    dependsOn generateJavaSources
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+    options.incremental = true
+}
+
+build.dependsOn shadowJar
+
+shadowJar {
+    archiveClassifier.set(null)
+    exclude 'module-info.class'
+}
+
+class Version {
+    String major, minor, revision
+
+    String toString() {
+        "${major}.${minor}.${revision}"
+    }
+}

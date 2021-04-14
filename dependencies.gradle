@@ -1,0 +1,63 @@
+def logback = '1.2.3'
+def gson = '2.8.6'
+def lang3 = '3.12.0'
+def guava = '30.1-jre'
+def jedis = '3.5.1'
+def jackson = '2.12.1'
+def classgraph = '4.8.102'
+def tracker = '0.1.0'
+def twitch4j = '1.2.1'
+def expiringmap = '0.5.9'
+def prometheus = '0.9.0'
+def webhooks = '0.5.6'
+def rethink = '2.4.4'
+def lombok = '1.18.18'
+
+repositories {
+    mavenCentral() // for transitive dependencies
+    maven {
+      name 'm2-dv8tion'
+      url 'https://m2.dv8tion.net/releases'
+    }
+    maven {
+        url "https://dl.bintray.com/romvoid95/maven"
+    }
+}
+dependencies {
+        // Base
+    implementation ("net.dv8tion:JDA:4.2.1_255"){
+        exclude module: 'opus-java'
+    }
+    implementation group: 'club.minnced', name: 'discord-webhooks', version: webhooks
+    
+    // JSON
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: jackson
+    implementation group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: jackson
+    
+    // Core
+    implementation group: 'com.google.guava', name: 'guava', version: guava
+    implementation group: 'ch.qos.logback', name: 'logback-classic', version: logback
+    implementation group: 'io.github.classgraph', name: 'classgraph', version: classgraph
+    
+    // Database
+    implementation group: 'redis.clients', name: 'jedis', version: jedis
+    implementation group: 'com.rethinkdb', name: 'rethinkdb-driver', version: rethink
+
+	// Utilities
+    implementation group: 'org.apache.commons', name: 'commons-lang3', version: lang3
+    implementation group: 'net.jodah', name: 'expiringmap', version: expiringmap
+    implementation group: 'com.github.twitch4j', name: 'twitch4j', version: twitch4j
+    
+    // Internal deps
+    implementation group: 'net.readonly.dev.tracker', name: 'bot-tracker', version: tracker
+    
+    // Prometheus
+    implementation group: 'io.prometheus', name: 'simpleclient', version: prometheus
+    implementation group: 'io.prometheus', name: 'simpleclient_hotspot', version: prometheus
+    implementation group: 'io.prometheus', name: 'simpleclient_httpserver', version: prometheus
+    
+    compileOnly group: 'org.projectlombok', name: 'lombok', version: lombok
+    annotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok
+    testCompileOnly group: 'org.projectlombok', name: 'lombok', version: lombok
+    testAnnotationProcessor group: 'org.projectlombok', name: 'lombok', version: lombok
+}

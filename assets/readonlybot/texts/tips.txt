@@ -1,0 +1,1 @@
+Did you know that you can provide an argument to help to get extended help about a command? Try `->help updatestatus`!
