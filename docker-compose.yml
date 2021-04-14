@@ -1,9 +1,14 @@
 version: "2"
 services:
+  rethink:
+    image: rethinkdb
+    volumes:
+      - .:/data
   redis:
     image: redis
   rocketbot:
     depends_on:
+      - "rethink"
       - "redis"
     image: readonlydev/discordbot
     volumes:

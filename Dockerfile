@@ -15,7 +15,7 @@ FROM frolvlad/alpine-glibc:alpine-3.9
 
 ARG jattachVersion
 
-WORKDIR /rocketbot
+WORKDIR /readonlybot
 
 RUN apk add --no-cache libstdc++
 
