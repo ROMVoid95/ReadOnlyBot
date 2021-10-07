@@ -42,9 +42,8 @@ import net.readonly.core.listener.BotListener;
 import net.readonly.core.listener.event.LoadingEvent;
 import net.readonly.core.modules.Module;
 import net.readonly.logs.LogUtils;
-import net.readonly.options.annotations.Option;
-import net.readonly.options.core.BotOption;
-import net.readonly.options.event.OptionEvent;
+import net.readonly.options.annotations.Optionable;
+import net.readonly.options.event.OptionRegisterEvent;
 import net.readonly.utils.DateFormatting;
 import net.readonly.utils.exports.Metrics;
 
@@ -171,7 +170,7 @@ public class ReadOnlyCore {
         }
 
         var commands = lookForAnnotatedOn(commandsPackage, Module.class);
-        var options = lookForAnnotatedOn(optionsPackage, Option.class);
+        var options = lookForAnnotatedOn(optionsPackage, Optionable.class);
         
         eventBus = new EventBus();
         
@@ -187,8 +186,10 @@ public class ReadOnlyCore {
         
         for (var optionClass : options) {
             try {
+            	log.info("Constructor: %s".formatted(optionClass.getDeclaredConstructor().toGenericString()));
             	eventBus.register(optionClass.getDeclaredConstructor().newInstance());
             } catch (Exception e) {
+            	e.printStackTrace();
                 log.error("Invalid module: no zero arg public constructor found for " + optionClass);
             }
         }
@@ -201,7 +202,7 @@ public class ReadOnlyCore {
             log.info("Registered all commands (@Module)");
             
             log.info("Registering all options (@Option)");
-            eventBus.post(new OptionEvent.Register());
+            eventBus.post(new OptionRegisterEvent());
             log.info("Registered all options (@Option)");
         }, "Event-Bus-Post").start();
     }
@@ -244,10 +245,8 @@ public class ReadOnlyCore {
         LogUtils.log(
                 """
                 Loaded %d commands.
-                With %d options.
                 Took %s to start. Total nodes: %d.""".formatted(
                         CommandProcessor.REGISTRY.commands().size(),
-                        BotOption.getAvaliableOptions().size(),
                         DateFormatting.formatDuration(elapsed), clusterTotal
                 )
         );

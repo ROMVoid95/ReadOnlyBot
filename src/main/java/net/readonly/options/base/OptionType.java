@@ -1,4 +1,4 @@
-package net.readonly.options.core;
+package net.readonly.options.base;
 
 import net.readonly.utils.StringUtils;
 

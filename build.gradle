@@ -1,18 +1,9 @@
-buildscript {
-  repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
-  }
-  dependencies {
-    classpath "com.github.jengelman.gradle.plugins:shadow:6.1.0"
-    classpath "com.palantir.gradle.docker:gradle-docker:0.26.0"
-  }
-}
-
 plugins {
     id 'java'
     id 'application'
+    id 'maven-publish'
+    id 'com.palantir.docker' version '0.30.0'
+    id "com.github.johnrengelman.shadow" version "7.1.0"
 }
 
 apply plugin: "com.github.johnrengelman.shadow"
@@ -22,8 +13,8 @@ mainClassName = "net.readonly.ReadOnlyBot"
 def ver = new Version(major: 1, minor: 0, revision: 0)
 version ver.toString()
 
-sourceCompatibility = 15
-targetCompatibility = 15
+sourceCompatibility = 16
+targetCompatibility = 16
 
 apply from: "dependencies.gradle"
 

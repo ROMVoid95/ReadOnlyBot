@@ -11,7 +11,7 @@ def expiringmap = '0.5.9'
 def prometheus = '0.9.0'
 def webhooks = '0.5.6'
 def rethink = '2.4.4'
-def lombok = '1.18.18'
+def lombok = '1.18.20'
 
 repositories {
     mavenCentral() // for transitive dependencies
@@ -19,10 +19,8 @@ repositories {
       name 'm2-dv8tion'
       url 'https://m2.dv8tion.net/releases'
     }
-    maven {
-        url "https://dl.bintray.com/romvoid95/maven"
-    }
 }
+
 dependencies {
         // Base
     implementation ("net.dv8tion:JDA:4.2.1_255"){
@@ -47,10 +45,7 @@ dependencies {
     implementation group: 'org.apache.commons', name: 'commons-lang3', version: lang3
     implementation group: 'net.jodah', name: 'expiringmap', version: expiringmap
     implementation group: 'com.github.twitch4j', name: 'twitch4j', version: twitch4j
-    
-    // Internal deps
-    implementation group: 'net.readonly.dev.tracker', name: 'bot-tracker', version: tracker
-    
+
     // Prometheus
     implementation group: 'io.prometheus', name: 'simpleclient', version: prometheus
     implementation group: 'io.prometheus', name: 'simpleclient_hotspot', version: prometheus

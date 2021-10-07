@@ -22,33 +22,42 @@
 
 package net.readonly.utils;
 
-import java.awt.Color;
-import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import net.dv8tion.jda.api.EmbedBuilder;
-import net.readonly.BotData;
-import net.readonly.ReadOnlyBot;
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.readonly.core.modules.commands.base.Context;
+import net.readonly.options.OptionController;
+import net.readonly.options.base.Option;
+import net.readonly.options.base.OptionSection;
 
 public class Builders {
 
-	private final static String AVATAR_URL = BotData.config().getAvatarUrl();
-	private final static String BOT_NAME = BotData.config().getBotname();
-
-	public static EmbedBuilder embed() {
-		return embed(false);
-	}
-
-	public static EmbedBuilder embed(boolean error) {
-		EmbedBuilder builder = new EmbedBuilder();
-
-		if (error) {
-			builder.setColor(new Color(235, 64, 52));
-			builder.setTitle("An error occurred.");
+	public static class OptionsBuilder {
+		public List<MessageEmbed> embeds = new ArrayList<>();
+		private List<OptionSection> sections = Arrays.asList(OptionSection.values());
+		
+		public OptionsBuilder(Context ctx) {
+			var lctx = ctx.getLanguageContext();
+			EmbedBuilder builder;
+			
+			builder = new EmbedBuilder()
+					.setTitle(lctx.get("commands.opt.list.header"))
+					.setDescription(lctx.get("commands.opt.list.description"));
+			embeds.add(builder.build());
+			
+			for(OptionSection section : sections) {
+				builder = new EmbedBuilder()
+				.setTitle("---------- Section: " + section.toString()  + " ----------");
+				for(Option opt : OptionController.getAvaliableOptions()) {
+					if(opt.getSection().equals(section)) {
+						builder.addField(opt.getAsField());
+					}
+				}
+				embeds.add(builder.build());
+			}
 		}
-
-		builder.setTimestamp(OffsetDateTime.now());
-		builder.setFooter("%s (%s)".formatted(BOT_NAME, ReadOnlyBot.VERSION), AVATAR_URL);
-
-		return builder;
 	}
 }

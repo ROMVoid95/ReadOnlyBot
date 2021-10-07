@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2021 Team Galacticraft
+ * MIT License 
+ *
+ * Copyright (c) 2021 ReadOnly Development
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -40,7 +42,7 @@ import redis.clients.jedis.JedisPool;
 public class BotData {
 	
     private static final ScheduledExecutorService exec = Executors.newScheduledThreadPool(
-            1, new ThreadFactoryBuilder().setNameFormat("RocketBot-Executor Thread-%d").build()
+            1, new ThreadFactoryBuilder().setNameFormat("ReadOnly-Executor Thread-%d").build()
     );
 	
 	private static JsonDataManager<Config> config;

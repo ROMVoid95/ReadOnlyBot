@@ -13,16 +13,16 @@ import club.minnced.discord.webhook.WebhookClientBuilder;
 import club.minnced.discord.webhook.send.WebhookEmbed;
 import club.minnced.discord.webhook.send.WebhookEmbed.EmbedFooter;
 import club.minnced.discord.webhook.send.WebhookEmbed.EmbedTitle;
-import net.readonly.BotData;
-import net.readonly.utils.DateFormatting;
 import club.minnced.discord.webhook.send.WebhookEmbedBuilder;
 import club.minnced.discord.webhook.send.WebhookMessageBuilder;
+import net.readonly.BotData;
+import net.readonly.utils.DateFormatting;
 
 public class LogUtils {
     private static final Logger log = LoggerFactory.getLogger(LogUtils.class);
 
-    private final static String ICON_URL = "https://i.imgur.com/xNZtDcm.png";
-    private static final String WEBHOOK_START = "https://discordapp.com/api/webhooks/";
+    private final static String ICON_URL = BotData.config().getAvatarUrl();
+    private static final String WEBHOOK_START = "https://discord.com/api/webhooks/";
     private static WebhookClient LOGBACK_WEBHOOK;
 
     static {
@@ -89,7 +89,7 @@ public class LogUtils {
     
     private static @NotNull WebhookMessageBuilder msg() {
     	return new WebhookMessageBuilder()
-    	.setUsername("RocketBot WebLog")
+    	.setUsername("%s Web Log".formatted(BotData.config().getBotname()))
     	.setAvatarUrl(ICON_URL);
     }
 }

@@ -1,5 +1,7 @@
 /*
- * Copyright (c) 2021 Team Galacticraft
+ * MIT License 
+ *
+ * Copyright (c) 2021 ReadOnly Development
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -54,7 +56,7 @@ public class ReadOnlyBot {
     public static final String GITHUB_URL = "https://github.com/ROMVoid95/ReadOnlyDiscordBot";
     public static final String USER_AGENT = "%s/@version@/DiscordBot (%s)".formatted(config.getBotname(), GITHUB_URL);
     public static final String VERSION = "@version@";
-    public static final String GIT_REVISION = "@revision@rocket";
+    public static final String GIT_REVISION = "@revision@";
 
 	private final ScheduledExecutorService executorService = Executors.newScheduledThreadPool(3,
 			new ThreadFactoryBuilder().setNameFormat("ReadOnly Scheduled Executor Thread-%d").build());

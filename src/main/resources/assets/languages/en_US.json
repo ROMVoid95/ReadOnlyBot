@@ -1,10 +1,10 @@
 {
 	"general": {
-		"invalid_number": "%1$sThat is not a valid number!",
+		"invalid_number": "%1$s That is not a valid number!",
 		"requested_by": "Requested by %1$s.",
-		"operation_timed_out": "%1$sThe time to answer this operation has ran out.",
-		"too_many_users_found": "%1$sToo many users found, maybe refine your search? (ex. use name#discriminator)\n**Users found:** %2$s",
-		"search_no_result": "%1$sYour search yielded no results :(",
+		"operation_timed_out": "%1$s The time to answer this operation has ran out.",
+		"too_many_users_found": "%1$s Too many users found, maybe refine your search? (ex. use name#discriminator)\n**Users found:** %2$s",
+		"search_no_result": "%1$s Your search yielded no results :(",
 		"unknown": "Unknown",
 		"days": "days",
 		"none": "None",
@@ -23,17 +23,17 @@
 		"name": "Name",
 		"description": "Description",
 		"options": "Options",
-		"find_members_failure": "%1$sDidn't find any member with your search criteria :(",
-		"too_many_members": "%1$sToo many members found, maybe refine your search? (ex. use name#discriminator)\n**Members found:** %2$s",
-		"too_many_mentions": "%1$sPlease only mention one person on member lookup.",
-		"query_too_small": "%1$sYour search query is too small. Make sure you're looking for at least 4 characters. If the username is too short, you're better off using username#discriminator or the user id.",
+		"find_members_failure": "%1$s Didn't find any member with your search criteria :(",
+		"too_many_members": "%1$s Too many members found, maybe refine your search? (ex. use name#discriminator)\n**Members found:** %2$s",
+		"too_many_mentions": "%1$s Please only mention one person on member lookup.",
+		"query_too_small": "%1$s Your search query is too small. Make sure you're looking for at least 4 characters. If the username is too short, you're better off using username#discriminator or the user id.",
 		"dust": "There's only dust here.",
 		"invalid_syntax": "Invalid syntax.",
-		"mention_user_required": "%1$sYou need to mention one user.",
-		"invalid_character": "%1$sThat is not an allowed character.",
+		"mention_user_required": "%1$s You need to mention one user.",
+		"invalid_character": "%1$s That is not an allowed character.",
 		"invalid_action": "You cannot do that, silly.",
-		"interactive_running": "%1$sThere's already an Interactive Operation (owned by you) on this channel.",
-		"cancelled": "%1$sCancelled request.",
+		"interactive_running": "%1$s There's already an Interactive Operation (owned by you) on this channel.",
+		"cancelled": "%1$s Cancelled request.",
 		"deprecated": "No longer used",
 		"space_notice": "If the name of it contains spaces, try \"wrapping it in quotes\". Probably the command help can tell you more.",
 		"missing_embed_permissions": "The bot is missing the Embed Links permission needed to display this command. Please give the bot the needed permissions (check channel and category permissions aswell)",
@@ -78,7 +78,7 @@
 				"Any issue?",
 				"U-Uh... h-hi"
 			],
-			"text": "%1$s*%2$s* -- **My ping: %3$,d ms** (Websocket: %4$,d ms)"
+			"text": "%1$s *%2$s* -- **My ping: %3$,d ms** (Websocket: %4$,d ms)"
 		},
 		"invite": {
 			"url": "Invite URL",
@@ -146,32 +146,54 @@
 		"help": {
 			"title": "Help",
 			"base_category": "Command list for category %1$s.\n",
-			"base": "**Full command list**. You can get more information on a command using `->help <name of command>`\n",
+			"base": "**Full command list**. You can get more information on a command using `--help <name of command>`\n",
 			"footer": "(Total Commands: %2$s)",
 			"commands": "Commands",
 			"extended": {
-				"no_help": "%1$sThere's no extended help set for this command.",
-				"not_found": "%1$sA command with this name doesn't exist"
+				"no_help": "%1$s There's no extended help set for this command.",
+				"not_found": "%1$s A command with this name doesn't exist"
 			}
 		},
-		"opt":  {
-      		"list": {
-        		"header": "**Options List**\n%1$s*All options must be prefixed with `--opt` when running them*\n%2$s"
-      		},
-      		"option_not_found": "%1$sInvalid option help name.",
-      		"invalid_args": "%1$sInvalid option or arguments."
+		"opt": {
+			"list": {
+				"header": "**Options List**",
+				"description": "*All options must be prefixed with `--opt` when running them*"
+			},
+			"option_not_found": "%1$s Invalid option help name.",
+			"invalid_args": "%1$s Invalid option or arguments."
 		}
 	},
 	"options": {
-		"error_general": "%1$sIncorrect usage or missing arguments",
+		"error_general": "%1$s Incorrect usage or missing arguments",
 		"check_data": {
-      		"retrieve_failure": "%1$sCannot retrieve values. Weird thing...",
-      		"header": "Options set for server **%1$s**.",
-      		"terminology": "\n\n**Terminology:** [] = empty list, null = not set, {} = empty object. If you see numbers=[...] it means that for that id, it applies what's inside the brackets. Objects are usually comma-separated",
-      		"footer": "This is a debug command, therefore it's not 100% user-friendly",
-      		"null_set": "is not set to anything.",
-      		"set_to": "is set to:"
-    	}
+			"retrieve_failure": "%1$s Cannot retrieve values. Weird thing...",
+			"header": "Options set for server **%1$s**.",
+			"terminology": "\n\n**Terminology:** [] = empty list, null = not set, {} = empty object. If you see numbers=[...] it means that for that id, it applies what's inside the brackets. Objects are usually comma-separated",
+			"footer": "This is a debug command, therefore it's not 100% user-friendly",
+			"null_set": "is not set to anything.",
+			"set_to": "is set to:"
+		},
+		"116_reply": {
+			"no_message": "%1$s No message specified!",
+			"reset_success": "%1$s Reply Message has been Reset to default",
+			"success": "%1$s Successfully set Reply Message"
+		},
+		"116_listen": {
+			"no_channels": "%1$s No channels specified!",
+			"cannot_write": "%1$s I don't have permission to WRITE messages in $2$s",
+			"add": {
+				"success": "%1$s Now listening for 1.16+ references in $2$s"
+			},
+			"remove": {
+				"success": "%1$s No longer listening for 1.16+ references in $2$s"
+			}
+		},
+		"prefix_set": {
+			"no_prefix": "%1$s You need to tell me what prefix you want to use.",
+			"too_long": "%1$s Don't you think that's a bit too long?",
+			"empty_prefix": "%1$s Cannot set the guild prefix to nothing...",
+			"success": "%1$s Prefix has been set to %2$s"
+		}
 	},
 	"discord_permissions": {
 		"create_instant_invite": "Create Instant Invite",
