@@ -14,10 +14,10 @@
 -  **(build)**  update to gradle-wrapper to 7.3 [ROM] ([87758](https://github.com/TeamGalacticraft/Galacticraft-Legacy/commit/8775850b147dae8))  
 -  **(compat)**  Addon backwards compatibility changes [ROM] ([2e811](https://github.com/TeamGalacticraft/Galacticraft-Legacy/commit/2e8113702326d40))  
    - ExtraPlanets
-   - - BiomeGenBaseGC constructor with adaptive param
+      - BiomeGenBaseGC constructor with adaptive param
    - AsmodeusCore
-   - - BiomeGenBaseGC constructor
-   - - biomeName AT entry due to hard dependency on micdoodle_at.cfg
+     - BiomeGenBaseGC constructor
+     - biomeName AT entry due to hard dependency on micdoodle_at.cfg
 -  make versioning more simple and cleaner [ROM] ([f5003](https://github.com/TeamGalacticraft/Galacticraft-Legacy/commit/f5003c10876dca1))  
 -  fix incorrect AT key in manifest [ROM] ([afe67](https://github.com/TeamGalacticraft/Galacticraft-Legacy/commit/afe67ec80432d48))  
 -  **(all)**  Add backwards compatibility for addons [ROM] ([d3ac6](https://github.com/TeamGalacticraft/Galacticraft-Legacy/commit/d3ac6652fdba402))  
